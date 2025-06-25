@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# todo-application
-=======
 # Todo Backend API
 
 A well-structured Node.js backend API for managing todos, built with Express.js, TypeScript, and Prisma ORM.
@@ -10,18 +7,24 @@ A well-structured Node.js backend API for managing todos, built with Express.js,
 ```
 src/
 ├── controllers/         # Request handlers and business logic coordination
+│   ├── auth.controller.ts
 │   └── todo.controller.ts
 ├── services/           # Business logic and data operations
+│   ├── auth.service.ts
 │   └── todo.service.ts
 ├── middleware/         # Custom middleware functions
+│   ├── auth.middleware.ts
 │   ├── error.middleware.ts
 │   ├── logger.middleware.ts
 │   └── validation.middleware.ts
 ├── routes/            # Route definitions
+│   ├── auth.routes.ts
 │   └── todo.routes.ts
 ├── types/             # TypeScript type definitions
+│   ├── auth.types.ts
 │   └── todo.types.ts
 ├── utils/             # Utility functions and helpers
+│   ├── auth.utils.ts
 │   └── helpers.ts
 ├── prisma.ts          # Prisma client configuration
 └── server.ts          # Express server setup
@@ -29,6 +32,7 @@ src/
 
 ## 🚀 Features
 
+- **JWT Authentication**: User signup, signin, and protected routes
 - **Modular Architecture**: Clean separation of concerns with controllers, services, and middleware
 - **TypeScript**: Full type safety throughout the application
 - **Prisma ORM**: Type-safe database operations with MySQL
@@ -37,25 +41,7 @@ src/
 - **Logging**: Request/response logging middleware
 - **CORS**: Cross-origin resource sharing enabled
 
-## 📋 API Endpoints
-
-### Todos
-
-| Method | Endpoint         | Description     | Body                                    |
-| ------ | ---------------- | --------------- | --------------------------------------- |
-| GET    | `/api/todos`     | Get all todos   | -                                       |
-| GET    | `/api/todos/:id` | Get todo by ID  | -                                       |
-| POST   | `/api/todos`     | Create new todo | `{title: string, completed?: boolean}`  |
-| PUT    | `/api/todos/:id` | Update todo     | `{title?: string, completed?: boolean}` |
-| DELETE | `/api/todos/:id` | Delete todo     | -                                       |
-
-### Health Check
-
-| Method | Endpoint  | Description  |
-| ------ | --------- | ------------ |
-| GET    | `/health` | Health check |
-
-## 🛠️ Technology Stack
+## ️ Technology Stack
 
 - **Node.js** - Runtime environment
 - **Express.js** - Web framework
@@ -76,7 +62,9 @@ src/
 
    ```bash
    cp .env.example .env
-   # Edit .env with your database credentials
+   # Add your database URL and JWT secret:
+   # DATABASE_URL="your-database-connection-string"
+   # JWT_SECRET="your-jwt-secret-key"
    ```
 
 3. **Run database migrations:**
@@ -92,8 +80,7 @@ src/
    ```
 
 5. **Server will be running at:**
-   - API: `http://localhost:3000/api/todos`
-   - Health check: `http://localhost:3000/health`
+   - `http://localhost:3000`
 
 ## 📝 Response Format
 
@@ -119,36 +106,6 @@ All API responses follow a consistent format:
 }
 ```
 
-## 🧪 Example Requests
-
-### Create a Todo
-
-```bash
-curl -X POST http://localhost:3000/api/todos \
-  -H "Content-Type: application/json" \
-  -d '{"title": "Learn Prisma ORM", "completed": false}'
-```
-
-### Get All Todos
-
-```bash
-curl http://localhost:3000/api/todos
-```
-
-### Update a Todo
-
-```bash
-curl -X PUT http://localhost:3000/api/todos/1 \
-  -H "Content-Type: application/json" \
-  -d '{"completed": true}'
-```
-
-### Delete a Todo
-
-```bash
-curl -X DELETE http://localhost:3000/api/todos/1
-```
-
 ## 🔧 Development
 
 - **Build:** `npm run build`
@@ -164,4 +121,3 @@ curl -X DELETE http://localhost:3000/api/todos/1
 4. **Maintainability**: Clear structure makes code easy to understand and modify
 5. **Scalability**: Easy to add new features and endpoints
 6. **Type Safety**: TypeScript ensures compile-time error checking
->>>>>>> 9c4d268 (feat: Create api with prisma)
