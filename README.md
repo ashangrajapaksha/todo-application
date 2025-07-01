@@ -2,122 +2,103 @@
 
 A well-structured Node.js backend API for managing todos, built with Express.js, TypeScript, and Prisma ORM.
 
-## 🏗️ Project Structure
+## ‍♂️ Getting Started on New Laptop
 
-```
-src/
-├── controllers/         # Request handlers and business logic coordination
-│   ├── auth.controller.ts
-│   └── todo.controller.ts
-├── services/           # Business logic and data operations
-│   ├── auth.service.ts
-│   └── todo.service.ts
-├── middleware/         # Custom middleware functions
-│   ├── auth.middleware.ts
-│   ├── error.middleware.ts
-│   ├── logger.middleware.ts
-│   └── validation.middleware.ts
-├── routes/            # Route definitions
-│   ├── auth.routes.ts
-│   └── todo.routes.ts
-├── types/             # TypeScript type definitions
-│   ├── auth.types.ts
-│   └── todo.types.ts
-├── utils/             # Utility functions and helpers
-│   ├── auth.utils.ts
-│   └── helpers.ts
-├── prisma.ts          # Prisma client configuration
-└── server.ts          # Express server setup
-```
+### Prerequisites
 
-## 🚀 Features
+Before setting up this project, ensure you have:
 
-- **JWT Authentication**: User signup, signin, and protected routes
-- **Modular Architecture**: Clean separation of concerns with controllers, services, and middleware
-- **TypeScript**: Full type safety throughout the application
-- **Prisma ORM**: Type-safe database operations with MySQL
-- **Validation**: Input validation middleware for all endpoints
-- **Error Handling**: Centralized error handling with proper HTTP status codes
-- **Logging**: Request/response logging middleware
-- **CORS**: Cross-origin resource sharing enabled
+- **Node.js** (v16 or higher) - [Download here](https://nodejs.org/)
+- **Git** - [Download here](https://git-scm.com/)
+- **Database** - MySQL/PostgreSQL installed locally or use a cloud database service
 
-## ️ Technology Stack
+### Setup Instructions
 
-- **Node.js** - Runtime environment
-- **Express.js** - Web framework
-- **TypeScript** - Type safety
-- **Prisma** - ORM and database toolkit
-- **MySQL** - Database
-- **CORS** - Cross-origin resource sharing
+1. **Clone the repository:**
 
-## 🏃‍♂️ Running the Application
+   ```bash
+   git clone <your-repository-url>
+   cd todo-backend
+   ```
 
-1. **Install dependencies:**
+2. **Install dependencies:**
 
    ```bash
    npm install
    ```
 
-2. **Set up environment variables:**
+3. **Set up environment variables:**
 
    ```bash
    cp .env.example .env
-   # Add your database URL and JWT secret:
-   # DATABASE_URL="your-database-connection-string"
-   # JWT_SECRET="your-jwt-secret-key"
    ```
 
-3. **Run database migrations:**
+   Edit the `.env` file with your configuration:
+
+   ```env
+   # Database connection string
+   DATABASE_URL="mysql://username:password@localhost:3306/todo_db"
+   # or for PostgreSQL:
+   # DATABASE_URL="postgresql://username:password@localhost:5432/todo_db"
+
+   # JWT secret (use a secure random string)
+   JWT_SECRET="your-super-secure-jwt-secret-key"
+   ```
+
+4. **Generate Prisma client:**
+
+   ```bash
+   npx prisma generate
+   ```
+
+5. **Run database migrations:**
 
    ```bash
    npx prisma migrate dev
    ```
 
-4. **Start development server:**
+6. **Start development server:**
 
    ```bash
    npm run dev
    ```
 
-5. **Server will be running at:**
-   - `http://localhost:3000`
+7. **Verify setup:**
+   - Server should start on `http://localhost:3000`
+   - Visit `http://localhost:3000/health` to check if the server is running
 
-## 📝 Response Format
+### 🔧 Development Commands
 
-All API responses follow a consistent format:
-
-### Success Response
-
-```json
-{
-  "success": true,
-  "data": {...},
-  "message": "Operation completed successfully"
-}
-```
-
-### Error Response
-
-```json
-{
-  "success": false,
-  "error": "Error description",
-  "message": "Additional error details"
-}
-```
-
-## 🔧 Development
-
-- **Build:** `npm run build`
+- **Development mode:** `npm run dev`
+- **Build project:** `npm run build`
 - **Start production:** `npm start`
 - **Database Studio:** `npx prisma studio`
 - **Reset database:** `npx prisma migrate reset`
 
-## 📁 Architecture Benefits
+### 🚨 Common Issues & Solutions
 
-1. **Separation of Concerns**: Controllers handle HTTP, services handle business logic
-2. **Reusability**: Services can be used across different controllers
-3. **Testability**: Each layer can be tested independently
-4. **Maintainability**: Clear structure makes code easy to understand and modify
-5. **Scalability**: Easy to add new features and endpoints
-6. **Type Safety**: TypeScript ensures compile-time error checking
+**Database Connection Error:**
+
+- Check your `DATABASE_URL` in `.env` file
+- Ensure your database server is running
+- Verify database credentials and database name exists
+
+**JWT Authentication Error:**
+
+- Make sure `JWT_SECRET` is set in `.env` file
+- Use a secure, random string for JWT_SECRET
+
+**Port Already in Use:**
+
+- Change the port in your server configuration
+- Or kill the process using port 3000: `lsof -ti:3000 | xargs kill`
+
+**Migration Errors:**
+
+- Reset database: `npx prisma migrate reset`
+- Then run: `npx prisma migrate dev`
+
+**Missing Dependencies:**
+
+- Delete `node_modules` and `package-lock.json`
+- Run: `npm install`
