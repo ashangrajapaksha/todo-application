@@ -39,6 +39,7 @@ export class TodoService {
     const newTodo = await prisma.todo.create({
       data: {
         title: data.title,
+        description: data.description ?? null,
         completed: data.completed ?? false,
         userId: data.userId,
       },
@@ -62,6 +63,7 @@ export class TodoService {
       },
       data: {
         ...(data.title !== undefined && { title: data.title }),
+        ...(data.description !== undefined && { title: data.description }),
         ...(data.completed !== undefined && { completed: data.completed }),
       },
     });

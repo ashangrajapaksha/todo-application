@@ -97,7 +97,7 @@ export class TodoController {
    */
   createTodo = async (req: Request, res: Response): Promise<void> => {
     try {
-      const { title, completed }: CreateTodoRequest = req.body;
+      const { title, completed, description }: CreateTodoRequest = req.body;
       const userId = (req as any).user?.userId;
 
       if (!userId) {
@@ -119,6 +119,7 @@ export class TodoController {
 
       const newTodo = await this.todoService.createTodo({
         title: title.trim(),
+        description,
         completed,
         userId,
       });
